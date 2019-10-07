@@ -1,6 +1,6 @@
 export class Stock {
   symbol: string;
-  lastTradePrice: number;
+  lastTradePriceOnly: number;
   change: number;
   changeInPercent: number;
 }

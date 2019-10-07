@@ -2,9 +2,9 @@
   <ul>
     <li *ngFor="let stock of stocks">
       <span>{{stock.symbol}} </span>
-      <span>{{stock.lastTradePrice}} </span>
-      <span>{{stock.change}} </span>
-      <span>{{stock.changeInPercent}} </span>
+      <span>{{stock.lastTradePriceOnly}} </span>
+      <span>{{stock.change | number:'1.1-2'}} </span>
+      <span>{{stock.changeInPercent | percent}} </span>
     </li>
   </ul>
 </div>
