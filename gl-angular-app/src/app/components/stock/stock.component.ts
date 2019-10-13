@@ -24,4 +24,12 @@ export class StockComponent implements OnInit {
      .subscribe(stockFromService => this.stocks = stockFromService);
   }
 
+  removeStock(stock: Stock) {
+   this.stocks.forEach((current, index) => {
+      if (stock.symbol === current.symbol) {
+        this.stocks.splice(index, 1);
+      }
+    });
+  }
+
 }

@@ -1,10 +1,23 @@
 <div>
-  <ul>
-    <li *ngFor="let stock of stocks">
-      <span>{{stock.symbol}} </span>
-      <span>{{stock.lastTradePriceOnly}} </span>
-      <span>{{stock.change | number:'1.1-2'}} </span>
-      <span>{{stock.changeInPercent | percent}} </span>
-    </li>
-  </ul>
-</div>
+  <div class="text-center">
+      <ng-container *ngIf="!stocks">
+          <app-spinner></app-spinner>
+      </ng-container>
+  </div>
+
+  <div *ngIf="stocks">
+      <div *ngFor="let stock of stocks">
+        <div class="card mb-3">
+          <h2 class="card-header">{{stock.symbol}} </h2>
+          <p>Last trade praice: {{stock.lastTradePriceOnly}}</p>
+          <p>Change: {{stock.change | number:'1.1-2'}}</p>
+          <p>Percentage change: {{stock.changeInPercent | percent}}</p>
+
+          <button class="btn btn-danger" (click)="removeStock(stock)">delete</button>
+
+          <button class="btn btn-dark"
+          routerLink="/editstock/{{ stock.symbol }}">edit</button>
+        </div>
+      </div>
+    </div>
+
