@@ -1,33 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { StocksService } from 'src/app/services/stocks-service.service';
-import { Stock } from 'src/app/models/stock';
+import { StockNew } from 'src/app/models/StockNew';
 import { ActivatedRoute } from '@angular/router';
+import { CustomPipes } from '../../helpers/customPipes';
 
 @Component({
-  selector: 'app-stock',
-  templateUrl: './stock.component.html',
-  styleUrls: ['./stock.component.css']
+  selector: 'app-generated-stock',
+  templateUrl: './generated-stock.component.html',
+  styleUrls: ['./generated-stock.component.css']
 })
-
-export class StockComponent implements OnInit {
+export class GeneratedStockComponent implements OnInit {
 
   constructor(
-    private stocksServiceService: StocksService,
+    private stocksService: StocksService,
     private route: ActivatedRoute,
   ) { }
 
-  stocks: Stock[];
+  stocks: StockNew[];
 
   ngOnInit() {
     this.getStocks();
   }
 
   getStocks(): void {
-     this.stocksServiceService.getStocks()
+     this.stocksService.getRandomlyGeneratedStock()
      .subscribe(stockFromService => this.stocks = stockFromService);
   }
 
-  removeStock(stock: Stock) {
+  removeStock(stock: StockNew) {
    this.stocks.forEach((current, index) => {
       if (stock.symbol === current.symbol) {
         this.stocks.splice(index, 1);
@@ -36,7 +36,7 @@ export class StockComponent implements OnInit {
   }
 
   refreshStocks(){
-    this.stocksServiceService.getStocks()
+    this.stocksService.getRandomlyGeneratedStock()
     .subscribe(stockFromService => this.stocks = stockFromService);
   }
 }

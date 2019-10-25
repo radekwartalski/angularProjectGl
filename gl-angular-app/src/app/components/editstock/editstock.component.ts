@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Stock } from '../../models/stock';
-import { StocksServiceService } from 'src/app/services/stocks-service.service';
+import { StocksService } from 'src/app/services/stocks-service.service';
 
 @Component({
   selector: 'app-editstock',
@@ -12,16 +12,19 @@ export class EditstockComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private stockService: StocksServiceService
+    private stockService: StocksService
   ) { }
 
   stock: Stock;
 
   ngOnInit() {
+    this.getStockBySymbol();
+  }
+
+  getStockBySymbol(){
     const symbol = this.route.snapshot.paramMap.get('symbol');
-    console.log(symbol)
     this.stockService.getStockBySymbol(symbol).subscribe(
-      stock => this.stock = stock);
+      stock => this.stock = {...stock}['0']);
   }
 
 }

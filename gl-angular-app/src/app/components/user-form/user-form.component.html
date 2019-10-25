@@ -1,0 +1,106 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+<div class = "card-body mb-3">
+
+<div class="form-row">
+
+<div class ="form-group col">
+    First Name:
+    <input class="form-control" type="text" formControlName="firstName" placeholder="first name"
+    [ngClass]="{'is-invalid' : f.firstName.errors }">
+    <div *ngIf="f['firstName'].errors" class = "text-danger" >
+        <div *ngIf="f['firstName'].errors.required">Please provide first name</div>
+        <div *ngIf="f['firstName'].hasError('maxlength')">Please provide less than 25 characters</div>
+        <div *ngIf="f['firstName'].hasError('minlength')">Please provide more than 4 characters</div>
+    </div>
+</div>
+
+<div class ="form-group col">
+    Last Name:
+    <input class="form-control" type="text" formControlName="lastName" placeholder="last name"
+    [ngClass]="{'is-invalid' : f.lastName.errors }">
+    <div *ngIf="f['lastName'].errors" class = "text-danger" >
+        <div *ngIf="f['lastName'].errors.required">Please provide first name</div>
+        <div *ngIf="f['lastName'].hasError('maxlength')">Please provide less than 25 characters</div>
+        <div *ngIf="f['lastName'].hasError('minlength')">Please provide more than 4 characters</div>
+    </div>
+</div>
+
+</div>
+
+<div class ="form-group">
+   Email:
+    <input class="form-control" type="text" formControlName="email" placeholder="name@example.com"
+    [ngClass]="{'is-invalid' : f.email.errors }">
+    <div *ngIf="f['email'].errors" class = "text-danger" >
+      <div *ngIf="f['email'].errors.email">Email format</div>
+      <div *ngIf="f['email'].errors.required">Please provide email</div>
+    </div>
+</div>
+
+<div class ="form-group">
+    Password:
+    <input class="form-control" type="text" formControlName="password" placeholder="password"
+    [ngClass]="{'is-invalid' : f.password.errors }">
+    <div *ngIf="f['password'].errors" class = "text-danger" >
+        <div *ngIf="f['password'].errors.required">Please provide password</div>
+    </div>
+</div>
+
+<div class="form-group">
+  Gender:
+  <div>
+    <select class="form-control" formControlName="gender"
+    [ngClass]="{'is-invalid' : f.gender.errors }">
+      <option selected>  </option>
+      <option>male   </option>
+      <option>female </option>
+    </select>
+    <div *ngIf="f['gender'].errors" class = "text-danger" >
+        <div *ngIf="f['gender'].errors.required">Please provide gender</div>
+    </div>
+  </div>
+</div>
+
+<div class ="form-group">
+    Disabled:
+    <select class="form-control">
+        <option>no </option>
+        <option>yes </option>
+      </select>
+</div>
+
+<div class ="form-group">
+  Country:
+  <input class="form-control" type="text" formControlName="country" placeholder="country"
+  [ngClass]="{'is-invalid' : f.country.errors }">
+  <div *ngIf="f['country'].errors" class = "text-danger" >
+      <div *ngIf="f['country'].errors.required ">Please provide date of birth</div>
+  </div>
+</div>
+
+
+<div class ="form-group">
+    Date of birth:
+    <input class="form-control datepicker" type="date" formControlName="dateOfBirth"
+    [ngClass]="{'is-invalid' : f.dateOfBirth.errors }">
+    <div *ngIf="f['dateOfBirth'].errors" class = "text-danger" >
+        <div *ngIf="f['dateOfBirth'].errors.required ">Please provide date of birth</div>
+    </div>
+</div>
+
+<div class ="form-group">
+    Description:
+    <input class="form-control" type="text" formControlName="description"  placeholder="description..."
+    [ngClass]="{'is-invalid' : f.description.errors }">
+    <div *ngIf="f['description'].errors" class = "text-danger" >
+        <div *ngIf="f['description'].errors.descriptionValidator ">Please provide description</div>
+    </div>
+</div>
+
+<button type="submit" [disabled]="!profileForm.valid" class="btn btn-dark">Submit</button>
+</div>
+</form>
+
+<p>
+    Form Status: {{ profileForm.status }}
+</p>

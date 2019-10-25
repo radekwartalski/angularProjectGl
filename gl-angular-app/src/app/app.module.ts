@@ -7,19 +7,34 @@ import { StockComponent } from './components/stock/stock.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { EditstockComponent } from './components/editstock/editstock.component';
-import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './components/home/home.component';
+import { UsersComponent } from './components/users/users.component';
+import { GeneratedStockComponent } from './components/generated-stock/generated-stock.component';
+import { UserFormComponent } from './components/user-form/user-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CustomPipes } from './helpers/customPipes';
+
 @NgModule({
   declarations: [
     AppComponent,
     StockComponent,
     SpinnerComponent,
     NavbarComponent,
-    EditstockComponent
+    EditstockComponent,
+    HomeComponent,
+    GeneratedStockComponent,
+    UsersComponent,
+    UserFormComponent,
+    CustomPipes
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule
+  ],
+  exports: [
+    CustomPipes
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent]

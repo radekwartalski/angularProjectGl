@@ -1,1 +1,9 @@
-<p>editstock works!</p>
+
+<div class="container">
+  <h2>{{stock.symbol}} </h2>
+  <p>Last trade praice: {{stock.lastTradePriceOnly}}</p>
+  <p>Change: {{stock.change | number:'1.1-2'}}</p>
+  <p>Percentage change: {{stock.changeInPercent | percent}}</p>
+  <button class="btn btn-dark mb-3" routerLink="">Reset Stocks</button>
+</div>
+

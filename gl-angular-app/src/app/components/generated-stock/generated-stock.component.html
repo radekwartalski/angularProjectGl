@@ -12,10 +12,10 @@
   <div *ngIf="stocks">
       <div *ngFor="let stock of stocks">
         <div class="card mb-3">
-          <h2 class="card-header">{{stock.symbol}} </h2>
-          <p>Last trade praice: {{stock.lastTradePriceOnly}}</p>
-          <p>Change: {{stock.change | number:'1.1-2'}}</p>
-          <p>Percentage change: {{stock.changeInPercent | percent}}</p>
+          <h2 class="card-header">{{ stock.symbol }} </h2>
+          <p>Last trade price: {{ stock.price}}</p>
+          <p>Change: <span [innerHTML]=" stock.change | changeCustomPipe"></span></p>
+          <p>Name: {{ stock.name }}</p>
 
           <button class="btn btn-danger" (click)="removeStock(stock)">delete</button>
 
