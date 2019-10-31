@@ -13,6 +13,8 @@ import { GeneratedStockComponent } from './components/generated-stock/generated-
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CustomPipes } from './helpers/customPipes';
+import { LoginComponent } from './components/login/login.component';
+import { PopupComponent } from './components/popup/popup.component';
 
 @NgModule({
   declarations: [
@@ -25,13 +27,15 @@ import { CustomPipes } from './helpers/customPipes';
     GeneratedStockComponent,
     UsersComponent,
     UserFormComponent,
-    CustomPipes
+    CustomPipes,
+    LoginComponent,
+    PopupComponent
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   exports: [
     CustomPipes

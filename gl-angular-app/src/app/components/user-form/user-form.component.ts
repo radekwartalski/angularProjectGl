@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { descriptionValidator } from '../../helpers/validators';
+import { LocalStorageService } from '../../services/local-storage.service';
 
 @Component({
   selector: 'app-user-form',
@@ -11,8 +12,9 @@ import { descriptionValidator } from '../../helpers/validators';
 export class UserFormComponent implements OnInit {
 
   submitted = false;
+  registrationKey = 'registration';
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private localStorageService: LocalStorageService) { }
 
   profileForm = this.fb.group ({
     firstName: ['', [Validators.required, Validators.maxLength(25), Validators.minLength(4)]],
@@ -29,15 +31,27 @@ export class UserFormComponent implements OnInit {
   ngOnInit() {
   }
 
-  get f(){
+  get f() {
     return this.profileForm.controls;
   }
 
   onSubmit() {
     this.submitted = true;
-    // TODO: Use EventEmitter with form value
-    console.warn(this.profileForm.value);
-    console.log(this.f);
+    if(!this.profileForm.invalid){
+      this.localStorageService.putItemsIntoLocalStorage(this.registrationKey, this.profileForm.value );
+    }
+  }
+
+  clearLocalStorage() {
+    this.localStorageService.resetLocalStorage();
+  }
+
+  getRegisteredUsersFromLocalStorage() {
+    this.localStorageService.getAllItemsFromLocalStorage(this.registrationKey);
+  }
+
+  getSpecItem() {
+   const specItem = this.localStorageService.getSpecificItemFromLocalStorage(this.registrationKey, 'email', 'r@r.pl');
   }
 
 }
