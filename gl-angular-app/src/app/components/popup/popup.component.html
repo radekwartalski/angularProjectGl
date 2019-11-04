@@ -11,8 +11,8 @@
             Welcome, You are registered successfully
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" routerLink="/home" data-dismiss="modal"> Close </button>
-          <button type="button" class="btn btn-primary" routerLink="/login">Login</button>
+          <button type="button" class="btn btn-secondary" routerLink="/home" data-dismiss="modal" (click)="closePopUp()"> Close </button>
+          <button type="button" class="btn btn-primary" routerLink="/login" (click)="closePopUp()">Login</button>
         </div>
       </div>
     </div>
