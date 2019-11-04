@@ -37,7 +37,7 @@ export class UserFormComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    if(!this.profileForm.invalid){
+    if (!this.profileForm.invalid){
       this.localStorageService.putItemsIntoLocalStorage(this.registrationKey, this.profileForm.value );
     }
   }

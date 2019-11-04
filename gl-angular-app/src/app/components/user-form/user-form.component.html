@@ -15,8 +15,8 @@
               <div class ="form-group col">
                   First Name:
                   <input class="form-control" type="text" formControlName="firstName"
-                  [ngClass]="{'is-invalid' : f.firstName.errors && submitted }">
-                  <div *ngIf="f['firstName'].errors && submitted" class = "text-danger" >
+                  [ngClass]="{'is-invalid' : f.firstName.errors && f.firstName.dirty }">
+                  <div *ngIf="f['firstName'].errors && f['firstName'].dirty " class = "text-danger" >
                       <div *ngIf="f['firstName'].errors.required">Please provide first name</div>
                       <div *ngIf="f['firstName'].hasError('maxlength')">Please provide less than 25 characters</div>
                       <div *ngIf="f['firstName'].hasError('minlength')">Please provide more than 4 characters</div>
@@ -26,8 +26,8 @@
               <div class ="form-group col">
                   Last Name:
                   <input class="form-control" type="text" formControlName="lastName"
-                  [ngClass]="{'is-invalid' : f.lastName.errors && submitted }">
-                  <div *ngIf="f['lastName'].errors && submitted" class = "text-danger" >
+                  [ngClass]="{'is-invalid' : f.lastName.errors && f.lastName.dirty }">
+                  <div *ngIf="f['lastName'].errors  && f['lastName'].dirty" class = "text-danger" >
                       <div *ngIf="f['lastName'].errors.required">Please provide first name</div>
                       <div *ngIf="f['lastName'].hasError('maxlength')">Please provide less than 25 characters</div>
                       <div *ngIf="f['lastName'].hasError('minlength')">Please provide more than 4 characters</div>
@@ -39,8 +39,8 @@
               <div class ="form-group">
                  Email:
                   <input class="form-control" type="email" formControlName="email" placeholder="name@example.com"
-                  [ngClass]="{'is-invalid' : f.email.errors && submitted }">
-                  <div *ngIf="f['email'].errors && submitted" class = "text-danger" >
+                  [ngClass]="{'is-invalid' : f.email.errors && f.email.dirty}">
+                  <div *ngIf="f['email'].errors && f['email'].dirty" class = "text-danger" >
                     <div *ngIf="f['email'].errors.email">Email format</div>
                     <div *ngIf="f['email'].errors.required">Please provide email</div>
                   </div>
@@ -49,8 +49,8 @@
               <div class ="form-group">
                   Password:
                   <input class="form-control" type="password" formControlName="password"
-                  [ngClass]="{'is-invalid' : f.password.errors && submitted}">
-                  <div *ngIf="f['password'].errors && submitted" class = "text-danger" >
+                  [ngClass]="{'is-invalid' : f.password.errors && f.password.dirty }">
+                  <div *ngIf="f['password'].errors && f['password'].dirty " class = "text-danger" >
                       <div *ngIf="f['password'].errors.required">Please provide password</div>
                   </div>
               </div>
@@ -59,12 +59,12 @@
                 Gender:
                 <div>
                   <select class="form-control" formControlName="gender"
-                  [ngClass]="{'is-invalid' : f.gender.errors && submitted}">
+                  [ngClass]="{'is-invalid' : f.gender.errors && f.gender.dirty }">
                     <option selected>  </option>
                     <option>male   </option>
                     <option>female </option>
                   </select>
-                  <div *ngIf="f['gender'].errors && submitted" class = "text-danger" >
+                  <div *ngIf="f['gender'].errors && f['gender'].dirty" class = "text-danger" >
                       <div *ngIf="f['gender'].errors.required">Please provide gender</div>
                   </div>
                 </div>
@@ -81,8 +81,8 @@
               <div class ="form-group">
                 Country:
                 <input class="form-control" type="text" formControlName="country"
-                [ngClass]="{'is-invalid' : f.country.errors && submitted }">
-                <div *ngIf="f['country'].errors && submitted" class = "text-danger" >
+                [ngClass]="{'is-invalid' : f.country.errors && f.country.dirty}">
+                <div *ngIf="f['country'].errors && f['country'].dirty " class = "text-danger" >
                     <div *ngIf="f['country'].errors.required ">Please provide country</div>
                 </div>
               </div>
@@ -91,29 +91,28 @@
               <div class ="form-group">
                   Date of birth:
                   <input class="form-control datepicker" type="date" formControlName="dateOfBirth"
-                  [ngClass]="{'is-invalid' : f.dateOfBirth.errors && submitted}">
-                  <div *ngIf="f['dateOfBirth'].errors && submitted" class = "text-danger" >
-                      <div *ngIf="f['dateOfBirth'].errors.required ">Please provide date of birth</div>
+                  [ngClass]="{'is-invalid' : f.dateOfBirth.errors && f.dateOfBirth.dirty}">
+                  <div *ngIf="f['dateOfBirth'].errors " class = "text-danger" >
+                      <div *ngIf="f['dateOfBirth'].errors.required && f['dateOfBirth'].errors.dirty">Please provide date of birth</div>
                   </div>
               </div>
 
               <div class ="form-group">
                   Description:
                   <textarea  class="form-control" type="text" formControlName="description"
-                  [ngClass]="{'is-invalid' : f.description.errors && submitted}"></textarea>
+                  [ngClass]="{'is-invalid' : f.description.errors && f.description.dirty}"></textarea>
                   <div *ngIf="f['description'].errors" class = "text-danger" >
-                      <div *ngIf="f['description'].errors.descriptionValidator ">Please provide description</div>
+                      <div *ngIf="f['description'].errors.descriptionValidator && f['description'].errors.dirty">Please provide description</div>
                   </div>
               </div>
-                <button type="submit" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal">Submit</button>
-                <div *ngIf ="profileForm.valid && submitted " >
+                <button [disabled]="!profileForm.valid" type="submit" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal" (click)="onSubmit()">Submit</button>
+                <div *ngIf="submitted">
                     <app-popup ></app-popup>
                 </div>
               </div>
               </form>
               <div class="text-center">
                 <button type="submit" class="btn btn-dark mr-1" (click)="clearLocalStorage()">Clear Local Storage</button>
-                <button type="submit" class="btn btn-dark mr-1" (click)="getSpecItem()">Get spec item from Local Storage</button>
               </div>
       </div>
       <div class="col">
