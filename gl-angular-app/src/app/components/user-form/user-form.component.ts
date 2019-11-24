@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { descriptionValidator } from '../../helpers/validators';
 import { LocalStorageService } from '../../services/local-storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-form',
@@ -11,10 +12,12 @@ import { LocalStorageService } from '../../services/local-storage.service';
 
 export class UserFormComponent implements OnInit {
 
-  submitted = false;
+  flagForMessageIfEmailAlreadyExist = false;
+  closePopUpflag = false;
+
   registrationKey = 'registration';
 
-  constructor(private fb: FormBuilder, private localStorageService: LocalStorageService) { }
+  constructor(private fb: FormBuilder, private localStorageService: LocalStorageService, private router: Router) { }
 
   profileForm = this.fb.group ({
     firstName: ['', [Validators.required, Validators.maxLength(25), Validators.minLength(4)]],
@@ -36,9 +39,15 @@ export class UserFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted = true;
-    if (!this.profileForm.invalid){
+    if (!this.emailExistInLocalStorage()){
+      this.flagForMessageIfEmailAlreadyExist = false;
       this.localStorageService.putItemsIntoLocalStorage(this.registrationKey, this.profileForm.value );
+      setTimeout(() => {
+        this.router.navigate(['/home']);
+        this.closePopUpflag = true;
+      }, 3000);
+    } else {
+      this.flagForMessageIfEmailAlreadyExist = true;
     }
   }
 
@@ -50,8 +59,20 @@ export class UserFormComponent implements OnInit {
     this.localStorageService.getAllItemsFromLocalStorage(this.registrationKey);
   }
 
-  getSpecItem() {
-   const specItem = this.localStorageService.getSpecificItemFromLocalStorage(this.registrationKey, 'email', 'r@r.pl');
+  emailExistInLocalStorage(): boolean {
+    return  this.localStorageService.getSpecificItemFromLocalStorage(this.registrationKey, 'email', this.profileForm.controls.email.value)
+    ? true : false;
   }
+
+//   countDown(timeLeft: number) {
+//     let counter = 0;
+//     let ixnterval = setInterval(() => {
+//       counter ++;
+//       console.log(timeLeft - counter);
+// 	  if (timeLeft - counter == 0) {
+// 		clearInterval(ixnterval)
+// 	 }
+//     }, 1000);
+//   }
 
 }

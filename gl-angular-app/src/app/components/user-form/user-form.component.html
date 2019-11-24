@@ -1,124 +1,135 @@
 <div class="container">
-    <div class="row">
-      <div class="col">
+  <div class="row">
+    <div class="col">
 
-      </div>
-      <div class="col-6">
-          <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-              <div class = "card-body mb-3">
-                <div class="mb-4">
-                    <h2>Register</h2>
+    </div>
+    <div class="col-6">
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+            <div class = "card-body mb-3">
+              <div class="mb-4">
+                  <h2>Register</h2>
+              </div>
+
+            <div class="form-row">
+
+            <div class ="form-group col">
+                First Name:
+                <input class="form-control" type="text" formControlName="firstName">
+                <div *ngIf="f['firstName'].errors && f['firstName'].dirty " class = "text-danger" >
+                    <div *ngIf="f['firstName'].errors.required">Please provide first name</div>
+                    <div *ngIf="f['firstName'].hasError('maxlength')">Please provide less than 25 characters</div>
+                    <div *ngIf="f['firstName'].hasError('minlength')">Please provide more than 4 characters</div>
                 </div>
+            </div>
 
-              <div class="form-row">
+            <div class ="form-group col">
+                Last Name:
+                <input class="form-control" type="text" formControlName="lastName">
+                <div *ngIf="f['lastName'].errors  && f['lastName'].dirty" class = "text-danger" >
+                    <div *ngIf="f['lastName'].errors.required">Please provide first name</div>
+                    <div *ngIf="f['lastName'].hasError('maxlength')">Please provide less than 25 characters</div>
+                    <div *ngIf="f['lastName'].hasError('minlength')">Please provide more than 4 characters</div>
+                </div>
+            </div>
 
-              <div class ="form-group col">
-                  First Name:
-                  <input class="form-control" type="text" formControlName="firstName"
-                  [ngClass]="{'is-invalid' : f.firstName.errors && f.firstName.dirty }">
-                  <div *ngIf="f['firstName'].errors && f['firstName'].dirty " class = "text-danger" >
-                      <div *ngIf="f['firstName'].errors.required">Please provide first name</div>
-                      <div *ngIf="f['firstName'].hasError('maxlength')">Please provide less than 25 characters</div>
-                      <div *ngIf="f['firstName'].hasError('minlength')">Please provide more than 4 characters</div>
-                  </div>
+            </div>
+
+            <div class ="form-group">
+               Email:
+                <input class="form-control" type="email" formControlName="email" placeholder="name@example.com">
+                <div *ngIf="f['email'].errors && f['email'].dirty" class = "text-danger" >
+                  <div *ngIf="f['email'].errors.email">Email format</div>
+                  <div *ngIf="f['email'].errors.required">Please provide email</div>
+                </div>
+            </div>
+
+            <div class ="form-group">
+                Password:
+                <input class="form-control" type="password" formControlName="password">
+                <div *ngIf="f['password'].errors && f['password'].dirty " class = "text-danger" >
+                    <div *ngIf="f['password'].errors.required">Please provide password</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+              Gender:
+              <div>
+                <select class="form-control" formControlName="gender">
+                  <option selected>  </option>
+                  <option>male   </option>
+                  <option>female </option>
+                </select>
+                <div *ngIf="f['gender'].errors && f['gender'].dirty" class = "text-danger" >
+                    <div *ngIf="f['gender'].errors.required">Please provide gender</div>
+                </div>
               </div>
+            </div>
 
-              <div class ="form-group col">
-                  Last Name:
-                  <input class="form-control" type="text" formControlName="lastName"
-                  [ngClass]="{'is-invalid' : f.lastName.errors && f.lastName.dirty }">
-                  <div *ngIf="f['lastName'].errors  && f['lastName'].dirty" class = "text-danger" >
-                      <div *ngIf="f['lastName'].errors.required">Please provide first name</div>
-                      <div *ngIf="f['lastName'].hasError('maxlength')">Please provide less than 25 characters</div>
-                      <div *ngIf="f['lastName'].hasError('minlength')">Please provide more than 4 characters</div>
-                  </div>
-              </div>
-
-              </div>
-
-              <div class ="form-group">
-                 Email:
-                  <input class="form-control" type="email" formControlName="email" placeholder="name@example.com"
-                  [ngClass]="{'is-invalid' : f.email.errors && f.email.dirty}">
-                  <div *ngIf="f['email'].errors && f['email'].dirty" class = "text-danger" >
-                    <div *ngIf="f['email'].errors.email">Email format</div>
-                    <div *ngIf="f['email'].errors.required">Please provide email</div>
-                  </div>
-              </div>
-
-              <div class ="form-group">
-                  Password:
-                  <input class="form-control" type="password" formControlName="password"
-                  [ngClass]="{'is-invalid' : f.password.errors && f.password.dirty }">
-                  <div *ngIf="f['password'].errors && f['password'].dirty " class = "text-danger" >
-                      <div *ngIf="f['password'].errors.required">Please provide password</div>
-                  </div>
-              </div>
-
-              <div class="form-group">
-                Gender:
-                <div>
-                  <select class="form-control" formControlName="gender"
-                  [ngClass]="{'is-invalid' : f.gender.errors && f.gender.dirty }">
-                    <option selected>  </option>
-                    <option>male   </option>
-                    <option>female </option>
+            <div class ="form-group">
+                Disabled:
+                <select class="form-control">
+                    <option>no </option>
+                    <option>yes </option>
                   </select>
-                  <div *ngIf="f['gender'].errors && f['gender'].dirty" class = "text-danger" >
-                      <div *ngIf="f['gender'].errors.required">Please provide gender</div>
-                  </div>
+            </div>
+
+            <div class ="form-group">
+              Country:
+              <input class="form-control" type="text" formControlName="country">
+              <div *ngIf="f['country'].errors && f['country'].dirty " class = "text-danger" >
+                  <div *ngIf="f['country'].errors.required ">Please provide country</div>
+              </div>
+            </div>
+
+
+            <div class ="form-group">
+                Date of birth:
+                <input class="form-control datepicker" type="date" formControlName="dateOfBirth">
+                <div *ngIf="f['dateOfBirth'].errors " class = "text-danger" >
+                    <div *ngIf="f['dateOfBirth'].errors.required && f['dateOfBirth'].errors.dirty">Please provide date of birth</div>
                 </div>
-              </div>
+            </div>
 
-              <div class ="form-group">
-                  Disabled:
-                  <select class="form-control">
-                      <option>no </option>
-                      <option>yes </option>
-                    </select>
-              </div>
-
-              <div class ="form-group">
-                Country:
-                <input class="form-control" type="text" formControlName="country"
-                [ngClass]="{'is-invalid' : f.country.errors && f.country.dirty}">
-                <div *ngIf="f['country'].errors && f['country'].dirty " class = "text-danger" >
-                    <div *ngIf="f['country'].errors.required ">Please provide country</div>
+            <div class ="form-group">
+                Description:
+                <textarea  class="form-control" type="text" formControlName="description"></textarea>
+                <div *ngIf="f['description'].errors" class = "text-danger" >
+                    <div *ngIf="f['description'].errors.descriptionValidator && f['description'].errors.dirty">Please provide description</div>
                 </div>
-              </div>
+            </div>
+            <!-- <div *ngIf="flagForMessageIfEmailAlreadyExist">
+              <app-popup></app-popup>
+            </div> -->
+            <button [disabled]="!profileForm.valid" type="submit" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal">Submit</button>
+            </div>
+            <p>czas: {{countDown(10)}}</p>
+
+            </form>
+            <div class="text-center">
+              <button class="btn btn-dark mr-1" (click)="clearLocalStorage()">Clear Local Storage</button>
+            </div>
 
 
-              <div class ="form-group">
-                  Date of birth:
-                  <input class="form-control datepicker" type="date" formControlName="dateOfBirth"
-                  [ngClass]="{'is-invalid' : f.dateOfBirth.errors && f.dateOfBirth.dirty}">
-                  <div *ngIf="f['dateOfBirth'].errors " class = "text-danger" >
-                      <div *ngIf="f['dateOfBirth'].errors.required && f['dateOfBirth'].errors.dirty">Please provide date of birth</div>
-                  </div>
-              </div>
-
-              <div class ="form-group">
-                  Description:
-                  <textarea  class="form-control" type="text" formControlName="description"
-                  [ngClass]="{'is-invalid' : f.description.errors && f.description.dirty}"></textarea>
-                  <div *ngIf="f['description'].errors" class = "text-danger" >
-                      <div *ngIf="f['description'].errors.descriptionValidator && f['description'].errors.dirty">Please provide description</div>
-                  </div>
-              </div>
-                <button [disabled]="!profileForm.valid" type="submit" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal" (click)="onSubmit()">Submit</button>
-                <div *ngIf="submitted">
-                    <app-popup ></app-popup>
-                </div>
-              </div>
-              </form>
-              <div class="text-center">
-                <button type="submit" class="btn btn-dark mr-1" (click)="clearLocalStorage()">Clear Local Storage</button>
-              </div>
-      </div>
-      <div class="col">
-
+<!-- Modal -->
+<div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+        </div>
+        <div class="modal-body">
+            Registration successful! You will be redirected to the home in: {{ countDown(5) }}
+        </div>
+        <div class="modal-footer">
+        </div>
       </div>
     </div>
+  </div>
+
+
+
+    </div>
+    <div class="col">
+
+    </div>
+  </div>
 </div>
-
-

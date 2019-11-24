@@ -20,19 +20,23 @@ putItemsIntoLocalStorage(key: string , value: any){
   localStorage.setItem(key, JSON.stringify(items));
 }
 
-resetLocalStorage(){
+resetLocalStorage() {
   localStorage.clear();
 }
 
-getAllItemsFromLocalStorage(key: string){
+getAllItemsFromLocalStorage(key: string) {
   return localStorage.getItem(key);
 }
 
 getSpecificItemFromLocalStorage(key: string, propertyId: string, propertyValue: string ) {
- const items = JSON.parse(localStorage.getItem(key));
- return items.find(item => {
-   return item[`${propertyId}`] === propertyValue;
+  const items = JSON.parse(localStorage.getItem(key));
+  if(items === null) {
+    return null;
+  } else {
+    return items.find(item => {
+      return item[`${propertyId}`] === propertyValue;
   });
+  }
 }
 
 doesItemExistInLocalStorage(key: string, propertyId: string, propertyValue: string): boolean {
